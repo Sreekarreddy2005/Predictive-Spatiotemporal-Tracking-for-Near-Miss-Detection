@@ -1,0 +1,90 @@
+# ==============================================================================
+# SafeCity AI: Default Pipeline Configuration
+# Phase 0 Baseline Configuration
+# ==============================================================================
+
+pipeline:
+  name: "SafeCity-AI-Pipeline"
+  version: "0.1.0"
+  device: "auto"  # 'auto' selects mps (Apple Silicon), cuda (NVIDIA), or cpu
+
+input:
+  source: ""               # Path to video file or webcam index (0)
+  max_frames: null         # Limit processed frames (null for all)
+  target_fps: null         # Target frame rate for uniform delta-t (null preserves source)
+  downsample_factor: 1     # Process every Nth frame (1 = every frame)
+  road_mask_path: null     # Optional binary mask for ROI filtering
+
+detection:
+  model_name: "yolov8n.pt" # Pretrained baseline weights (auto-downloaded by Ultralytics)
+  confidence_threshold: 0.35
+  iou_threshold: 0.45
+  img_size: 640
+  # COCO class IDs: 0: person, 1: bicycle, 2: car, 3: motorcycle, 5: bus, 7: truck
+  target_classes: [0, 1, 2, 3, 5, 7]
+  class_names:
+    0: "pedestrian"
+    1: "bicycle"
+    2: "car"
+    3: "motorcycle"
+    5: "bus"
+    7: "truck"
+
+tracking:
+  tracker_type: "bytetrack"
+  track_high_thresh: 0.5
+  track_low_thresh: 0.1
+  new_track_thresh: 0.6
+  track_buffer: 30         # Frames to keep lost tracks alive
+  match_thresh: 0.8
+  min_box_area: 100        # Pixel area filter to reject noisy micro-detections
+
+calibration:
+  enabled: false           # Flagged false until homography is calibrated
+  calibration_file: null   # Path to yaml containing homography matrix H
+  units: "pixels"          # Switched to "meters" only after valid calibration
+  image_to_world_matrix: null
+
+prediction:
+  method: "constant_velocity" # Options: 'constant_velocity', 'lstm', 'social_lstm', 'st_gnn'
+  observation_window_sec: 2.0 # Historical duration to fit velocity / encode history
+  prediction_horizon_sec: 3.0 # Future forecast duration
+  step_size_sec: 0.2          # 5 trajectory forecast points per second
+  checkpoint_path: null       # Neural network weights (null for constant_velocity)
+
+metrics:
+  ttc_threshold_sec: 2.0      # Critical Time-to-Collision threshold
+  pet_threshold_sec: 1.5      # Critical Post-Encroachment Time threshold
+  drac_threshold_m_s2: 3.5    # Deceleration Rate to Avoid Collision (requires metric calibration)
+  min_separation_critical: 1.5 # Critical distance threshold (meters if calibrated, else normalized)
+  event_hysteresis_frames: 4  # Consecutive alert frames required to trigger an event
+  event_cooldown_frames: 30   # Suppress re-triggering for identical agent pair within cooldown window
+
+novelty_modules:
+  probabilistic_ttc:
+    enabled: false
+    num_monte_carlo_samples: 100
+    position_std_m: 0.35      # Uncertainty standard deviation in position (m or px)
+    velocity_std_m_s: 0.5     # Uncertainty standard deviation in velocity (m/s or px/s)
+  context_encoder:
+    enabled: false
+    method: "heuristic"       # 'heuristic' (luminance/contrast) or 'classifier'
+    weight_multiplier_max: 1.3
+  risk_fusion:
+    enabled: false
+    method: "weighted_linear" # 'weighted_linear' or 'mlp'
+    weights:
+      ttc_score: 0.40
+      separation_score: 0.25
+      relative_speed_score: 0.20
+      context_multiplier: 0.15
+
+storage:
+  db_path: "outputs/events.db"
+  save_evidence_clips: true
+  evidence_clip_padding_sec: 2.0
+
+dashboard:
+  host: "localhost"
+  port: 8501
+  export_dir: "outputs"

@@ -1,0 +1,52 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+
+# Data directories
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/annotations/*
+!data/annotations/.gitkeep
+data/samples/*
+!data/samples/.gitkeep
+!data/samples/cctv/sample_traffic.mp4
+
+# Output artifacts (ignore generated videos & sqlite db, keep benchmark jsons)
+outputs/*
+!outputs/.gitkeep
+!outputs/*.json
+
+# Model checkpoints (track lightweight trained PyTorch models, ignore raw large weights)
+models/*
+!models/.gitkeep
+!models/lstm_baseline.pt
+!models/interaction_stgat.pt
+yolov8n.pt
+
+# IDE & OS files
+.DS_Store
+.idea/
+.vscode/
+.agents/
+*.swp
+*.swo
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Logs & temporary files
+*.log
+scratch/
+
+*.egg-info/

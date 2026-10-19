@@ -1,0 +1,29 @@
+{
+  "benchmark_name": "Deterministic vs Probabilistic TTC (Novelty 2)",
+  "num_scenarios_evaluated": 500,
+  "elapsed_seconds": 0.28,
+  "metrics_summary": {
+    "deterministic_ttc": {
+      "roc_auc": 0.9543,
+      "precision": 1.0,
+      "recall": 0.932,
+      "f1_score": 0.9648,
+      "far_at_95_recall": 0.668,
+      "mean_warning_lead_time_sec": 1.41
+    },
+    "probabilistic_ttc_novelty2": {
+      "roc_auc": 0.9823,
+      "precision": 0.8676,
+      "recall": 0.996,
+      "f1_score": 0.9274,
+      "far_at_95_recall": 0.136,
+      "mean_warning_lead_time_sec": 1.54
+    }
+  },
+  "performance_gains": {
+    "roc_auc_gain": 0.028,
+    "false_alarm_rate_reduction_pct": 79.6,
+    "f1_score_gain": -0.0374,
+    "lead_time_gain_seconds": 0.14
+  }
+}

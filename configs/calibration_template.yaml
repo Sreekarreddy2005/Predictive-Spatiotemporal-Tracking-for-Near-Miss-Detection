@@ -1,0 +1,38 @@
+# ==============================================================================
+# SafeCity AI: Camera Calibration Template
+# Computes 3x3 Homography Matrix: World Plane (meters) <-> Image Plane (pixels)
+# ==============================================================================
+
+camera_id: "intersection_cam_01"
+description: "Fixed intersection CCTV camera viewing approach"
+resolution: [1920, 1080] # [width, height]
+
+# Reference Ground-Plane Correspondences:
+# Provide at least 4 coplanar points on the road surface with known real-world distances.
+# World Coordinates: in meters (e.g., [X_m, Y_m] from a chosen road origin)
+# Image Coordinates: in pixels [u_px, v_px]
+points:
+  - id: "p1"
+    image_coords: [450, 720]
+    world_coords: [0.0, 0.0]
+    description: "Pedestrian crosswalk bottom-left corner"
+  - id: "p2"
+    image_coords: [1420, 715]
+    world_coords: [18.5, 0.0]
+    description: "Pedestrian crosswalk bottom-right corner"
+  - id: "p3"
+    image_coords: [1180, 480]
+    world_coords: [18.5, 30.0]
+    description: "Stop line across lanes"
+  - id: "p4"
+    image_coords: [680, 485]
+    world_coords: [0.0, 30.0]
+    description: "Stop line road edge"
+
+# Computed 3x3 Homography Matrix (Row-major):
+# H maps [u, v, 1]^T -> s * [X, Y, 1]^T
+homography_matrix: null
+
+# Validation metrics (e.g. reprojection error in meters or pixels):
+reprojection_error: null
+validation_status: "uncalibrated"

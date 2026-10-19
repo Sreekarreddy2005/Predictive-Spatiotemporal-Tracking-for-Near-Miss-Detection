@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "safecity"
+version = "0.1.0"
+description = "SafeCity AI: Predictive Spatiotemporal Tracking for Near-Miss Detection"
+readme = "README.md"
+requires-python = ">=3.10,<3.12"
+authors = [
+    { name = "Sreekar Reddy Pindi" },
+    { name = "Harikaran" }
+]
+dependencies = [
+    "torch>=2.2.0",
+    "torchvision>=0.17.0",
+    "ultralytics>=8.1.0",
+    "opencv-python>=4.8.0",
+    "numpy>=1.26.0",
+    "scipy>=1.11.0",
+    "pandas>=2.1.0",
+    "pyyaml>=6.0.1",
+    "streamlit>=1.30.0",
+    "plotly>=5.18.0",
+    "tqdm>=4.66.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

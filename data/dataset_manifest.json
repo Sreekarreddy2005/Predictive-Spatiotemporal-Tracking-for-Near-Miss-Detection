@@ -1,0 +1,115 @@
+{
+  "manifest_version": "1.0.0",
+  "project": "SafeCity AI",
+  "created_at": "2026-10-19T20:45:00+05:30",
+  "updated_at": "2026-10-19T20:45:00+05:30",
+  "datasets": [
+    {
+      "id": "ua-detrac-sample",
+      "name": "UA-DETRAC Benchmark (Verification Sample)",
+      "intended_module": "Detection & Multi-Object Tracking (CCTV angle)",
+      "local_path": "data/raw/UA-DETRAC",
+      "source_url": "https://sites.google.com/view/daweidu/projects/ua-detrac",
+      "download_url": "https://drive.google.com/file/d/1fQC6CEWOeL9pnJ4ZdD7U2gromcnWDRgm/view?usp=sharing",
+      "version": "v1.0",
+      "splits": ["train", "test"],
+      "annotation_format": "XML / VOC style sequence annotations",
+      "coordinate_system": "image_pixels",
+      "units": "pixels",
+      "status": "pending_download",
+      "validation": {
+        "validated": false,
+        "checked_at": null,
+        "total_sequences": 0,
+        "total_frames": 0,
+        "classes_found": [],
+        "errors": []
+      }
+    },
+    {
+      "id": "ind-sample",
+      "name": "inD (Intersection Drone Dataset)",
+      "intended_module": "Trajectory Prediction & Interaction Modeling (Social-LSTM/ST-GNN)",
+      "local_path": "data/raw/inD",
+      "source_url": "https://levelxdata.com/ind-dataset/",
+      "download_url": "Academic request form via levelXdata portal",
+      "version": "v1.1",
+      "splits": ["location_01", "location_02", "location_03", "location_04"],
+      "annotation_format": "CSV (tracks.csv, tracksMeta.csv, recordingsMeta.csv)",
+      "coordinate_system": "UTM / local orthorectified Cartesian (meters)",
+      "units": "meters, meters/second, 25 Hz",
+      "status": "pending_access_approval",
+      "validation": {
+        "validated": false,
+        "checked_at": null,
+        "total_tracks": 0,
+        "classes_found": [],
+        "errors": []
+      }
+    },
+    {
+      "id": "levelxdata-trajectories",
+      "name": "levelXdata Vehicle Trajectory Benchmark",
+      "intended_module": "Trajectory Prediction Baseline (Per-Agent LSTM & Constant Velocity)",
+      "local_path": "data/raw/trajectories/01_tracks.csv",
+      "source_url": "https://github.com/idslab-autosec/risk",
+      "download_url": "https://raw.githubusercontent.com/idslab-autosec/risk/master/data/highD/01_tracks.csv",
+      "version": "v1.0",
+      "splits": ["01_tracks.csv"],
+      "annotation_format": "CSV (frame, id, x, y, width, height, xVelocity, yVelocity...)",
+      "coordinate_system": "Cartesian (meters)",
+      "units": "meters, meters/second, 25 Hz",
+      "status": "downloaded_and_verified",
+      "validation": {
+        "validated": true,
+        "checked_at": "2026-10-19T23:15:30+05:30",
+        "total_rows": 348751,
+        "errors": []
+      }
+    },
+    {
+      "id": "aicity-track2-synwts",
+      "name": "AI City Challenge / SynWTS / WTS Safety Dataset",
+      "intended_module": "Near-Miss Detection & Ground-Truth Incident Evaluation",
+      "local_path": "data/raw/AI_City_Track2",
+      "source_url": "https://huggingface.co/datasets/mlcglab/synwts",
+      "download_url": "https://huggingface.co/datasets/mlcglab/synwts",
+      "version": "2024-Track2",
+      "splits": ["train", "val", "test"],
+      "annotation_format": "JSON / JSONL with timestamps, agent IDs, and conflict labels",
+      "coordinate_system": "video_frame_timestamps",
+      "units": "seconds, normalized bounding boxes",
+      "status": "pending_download",
+      "validation": {
+        "validated": false,
+        "checked_at": null,
+        "total_events": 0,
+        "classes_found": [],
+        "errors": []
+      }
+    },
+    {
+      "id": "custom-cctv-samples",
+      "name": "Custom Urban CCTV Video Footages",
+      "intended_module": "End-to-End Pipeline Demonstration & Streamlit Replay",
+      "local_path": "data/samples/cctv",
+      "source_url": "Intel IoT Devkit Sample Videos (BSD-3-Clause)",
+      "download_url": "https://raw.githubusercontent.com/intel-iot-devkit/sample-videos/master/car-detection.mp4",
+      "version": "v1.0",
+      "splits": ["sample_traffic.mp4"],
+      "annotation_format": "Unlabeled video / ByteTrack auto-tracked output in outputs/tracking_summary.json",
+      "coordinate_system": "image_pixels",
+      "units": "pixels, 12.5 FPS",
+      "status": "downloaded_and_verified",
+      "validation": {
+        "validated": true,
+        "checked_at": "2026-10-19T21:39:15+05:30",
+        "video_count": 1,
+        "frames": 377,
+        "resolution": "768x432",
+        "unique_tracks_detected": 8,
+        "errors": []
+      }
+    }
+  ]
+}

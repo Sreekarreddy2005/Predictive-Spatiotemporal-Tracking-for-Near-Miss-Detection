@@ -1,0 +1,22 @@
+{
+  "input_video": "data/samples/cctv/sample_traffic.mp4",
+  "output_video": "outputs/annotated_traffic.mp4",
+  "total_frames_processed": 377,
+  "video_fps": 12.5,
+  "processing_fps": 40.24130665782127,
+  "elapsed_seconds": 9.368483066558838,
+  "total_unique_tracks": 9,
+  "unique_track_ids": [
+    1,
+    5,
+    7,
+    8,
+    12,
+    23,
+    25,
+    30,
+    34
+  ],
+  "total_near_miss_events_logged": 0,
+  "is_calibrated": true
+}
